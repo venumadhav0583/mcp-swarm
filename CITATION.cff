@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this reference harness, please cite the arXiv preprint."
+title: "MCP-Swarm: A Reference Architecture and Synthetic Control-Validation Harness for Secure Multi-Agent Tool Use"
+authors:
+  - family-names: Kalluru
+    given-names: Venumadhav
+    orcid: "https://orcid.org/0009-0006-8250-9899"
+type: software
+repository-code: "https://github.com/venumadhav0583/mcp-swarm"
+license: MIT
