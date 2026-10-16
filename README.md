@@ -111,3 +111,7 @@ papers_repo/
 | `llncs` (Springer) | 03 (v1) | `pdflatex main.tex` |
 | `acmart` journal | 04 (v1 TiiS) | `pdflatex → bibtex → pdflatex × 2` |
 | `elsarticle` (Elsevier) | 08 (v2, JSS) | `pdflatex main.tex` (inline `thebibliography`, no bibtex needed) |
+
+## CICT 2026 controlled evaluation
+
+The `cict2026/` folder contains the harness, dataset builders, raw per-call logs and analysis scripts for the CICT 2026 paper (Paper 348). It covers seven open-weight models on 300 MMLU questions, council and rotation ablations, an adaptive-memory experiment, and deadline and failure analysis. See `cict2026/README.md` for the steps to reproduce.
