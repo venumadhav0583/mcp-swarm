@@ -1,0 +1,22 @@
+\subsection{Adaptive Memory}
+\textit{Task.} Because no public benchmark matches multi-session enterprise memory, a seeded synthetic task was built with fictional entities. Forty earlier sessions each left four memory entries (two project facts, such as a budget code, owner, hosting vendor or go-live date, and two routine remarks), giving 160 entries and about 2,100 prompt tokens of history. Test queries either ask for one stored fact (68 queries) or need no memory at all (32 arithmetic queries). Twenty further queries were held out to set $\tau$ before testing: $\tau$ was fixed at 0.22, the highest top-1 similarity of any memory-free calibration query plus a margin of 0.05. Qwen2.5-1.5B answered every query under four conditions (Table~\ref{tab:memory}), and an answer counted as correct when it contained the gold string.
+
+\begin{table}[t]
+\caption{Memory Conditions (Qwen2.5-1.5B; 68 Memory and 32 Memory-Free Queries)}
+\label{tab:memory}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Condition & Mem. acc. & Free acc. & Tokens & Lat. (s) & Entries \\
+\midrule
+No memory & 0.0\% & 84.4\% & 44 & 1.39 & 0 \\
+Full history & 79.4\% & 68.8\% & 2,137 & 29.56 & 160 \\
+Fixed top-5 & 100\% & 62.5\% & 130 & 2.08 & 5 \\
+Adaptive ($\tau$=0.22) & 100\% & 78.1\% & 102 & 1.67 & 3.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Results.} Sending the full history cost 2,137 prompt tokens and 29.6\,s per query and still missed 14 of 68 stored facts (79.4\%, 95\% CI 69.1--88.2\%), all of which the adaptive condition answered ($p<0.001$); this is consistent with weaker use of facts buried in long contexts \cite{liu2024lost}. Both retrieval conditions found the gold entry for every memory query, but four of the five entries injected by fixed top-5 retrieval were not needed, and on memory-free queries those irrelevant notes lowered accuracy from 84.4\% to 62.5\%. Threshold gating kept memory out of 29 of the 32 memory-free queries, which recovered most of that loss (78.1\%; 7 gains and 2 losses against top-5, $p=0.18$) and cut mean prompt tokens by 21\% against top-5 and by 95\% against full history. A retrieval-only sweep showed that any $\tau$ from 0.30 to 0.60 would have excluded every memory-free query while keeping every gold entry; at 0.70, recall fell to 89.7\%. The calibrated value of 0.22 was therefore conservative. Each fact is phrased close to its query, so these numbers bound the token saving better than they predict accuracy on real records.

@@ -1,0 +1,35 @@
+\documentclass[conference,a4paper]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\emergencystretch=1em
+\begin{document}
+\title{Enterprise AI Systems with MCP-Swarm: A Rotational Multi-Agent Framework for Persistent Memory, Consensus Reasoning, and Intelligent Document Understanding}
+\author{\IEEEauthorblockN{Venumadhav Kalluru}
+\IEEEauthorblockA{\textit{Independent Researcher}\\
+Cumming, Georgia, USA\\
+greenkal2026@gmail.com}}
+\maketitle
+\begin{abstract}
+Enterprise assistants built on large language models (LLMs) must call tools safely, decide when to trust an answer and carry knowledge across sessions. MCP-Swarm combines a Model Context Protocol (MCP) gateway with task-scoped tokens, a rotational council that queries four of seven models and merges their answers by confidence and agreement, and a persistent memory that is retrieved only above a similarity threshold. Seven open-weight models of 1--1.7 billion parameters answered 300 questions from the Massive Multitask Language Understanding (MMLU) benchmark on a CPU, and single-model, fixed, rotational and random councils were compared on the same outputs over ten seeds with exact paired tests. No council beat the best single model: the rotational council reached 44.6\% against 57.7\% at four times the token cost, because near-chance members outvoted the strongest one, and none of the 120 fixed councils of two to seven members did better, while tokens grew linearly with council size. Rotation matched random selection in accuracy but bounded model idle time, and confidence carried more signal than agreement. In a synthetic multi-session memory task, threshold-gated retrieval answered all 68 stored-fact queries at 102 prompt tokens per query, against 79.4\% at 2,137 tokens for full history, and withheld memory from 29 of 32 queries that needed none. In a small real MCP run, no unauthorised export call succeeded. Equal-weight councils need strong, comparable members to pay for their cost.
+\end{abstract}
+\begin{IEEEkeywords}
+Model Context Protocol, multi-agent systems, LLM ensembles, consensus, retrieval-augmented memory, tool authorization
+\end{IEEEkeywords}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.94\textwidth]{figs/fig1_arch.pdf}
+\caption{MCP-Swarm architecture. Solid borders mark components implemented and evaluated in this paper; dashed borders mark design components that were not evaluated. Arrows show request and response paths; tool calls reach MCP servers only through the gateway.}
+\label{fig:arch}
+\end{figure*}
+\input{part_front}
+\section{Results and Discussion}
+\input{part_results}
+\input{part_memory}
+\input{part_tail}
+\input{part_bib}
+\end{document}
