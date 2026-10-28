@@ -88,8 +88,8 @@ def para(style, text='', size=None):
     return p
 title = tex2txt(re.search(r'\\title\{(.*?)\}\n', TEX, re.S).group(1))
 para('paper title', title)
-p = para('Author'); p.add_run('Venu Kalluru').font.size = Pt(11)
-for line in ['Independent Researcher', 'Cumming, Georgia, USA', 'vmvk04@gmail.com']:
+p = para('Author'); p.add_run('Venumadhav Kalluru').font.size = Pt(11)
+for line in ['Independent Researcher', 'Cumming, Georgia, USA', 'greenkal2026@gmail.com']:
     p.add_run().add_break(); r = p.add_run(line); r.font.size = Pt(9)
     if line == 'Independent Researcher': r.italic = True
 def set_cols(sectPr, n):
@@ -169,7 +169,7 @@ def figure(png, caption, width_cm=8.45):
     p.paragraph_format.first_line_indent = 0; p.paragraph_format.keep_with_next = True; p.paragraph_format.space_before = Pt(4)
     p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     p.add_run().add_picture(png, width=Cm(width_cm))
-    cp = para('figure caption'); nofmt(cp); cp.add_run('Fig. 2.\u2002'); runs(cp, caption)
+    cp = para('figure caption'); nofmt(cp); cp.add_run('Fig. 2.\u2002'); runs(cp, caption.replace('(a) ', '(a)\u00a0'))
 def wide_figure(png, caption):
     """Full-width figure between continuous section breaks (two-column text above and below)."""
     brk = doc.add_paragraph(style='Body Text'); brk.paragraph_format.space_after = Pt(0)
@@ -240,7 +240,7 @@ for block in re.split(r'\n\s*\n', main):
         if seg.startswith('enter the prompt') or seg.startswith('where ') or seg.startswith('is returned'):
             pp.paragraph_format.first_line_indent = 0
     # anchor the wide figure after the first Related Works paragraph
-    if pending_wide is not None and block.startswith('Multi-agent LLM frameworks'):
+    if pending_wide is not None and block.startswith('Guo et al.'):
         FLOAT_FUN['fig:arch'](pending_wide); pending_wide = None
 p = para('Heading 5', 'References')
 for k, t in bib:
@@ -257,5 +257,5 @@ for tag, order in ORDER.items():
         kids = list(el); kids.sort(key=lambda k: order.index(k.tag[len(W):]) if k.tag.startswith(W) and k.tag[len(W):] in order else 99)
         for k in kids: el.remove(k)
         for k in kids: el.append(k)
-doc.core_properties.title = title; doc.core_properties.author = 'Venu Kalluru'
+doc.core_properties.title = title; doc.core_properties.author = 'Venumadhav Kalluru'
 doc.save('CICT348.docx'); print('saved', labels)

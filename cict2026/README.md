@@ -11,6 +11,8 @@ Granite-3.1-1B-A400M-Instruct, Falcon3-1B-Instruct, OLMo-2-0425-1B-Instruct (not
 5. `python3 harness/build_memory_task.py` -> data/memory_task.json (synthetic, fictional entities)
 6. `python3 harness/run_memory.py`     -> results/memory_raw.jsonl, memory_calibration.json
 7. `python3 harness/analyze_memory.py` -> results/memory_analysis.json (Table III, tau sweep)
+8. `python3 harness/analyze_scaling.py` -> results/analysis_scaling.json (camera-ready: council size k = 1..7, CPU-s per correct answer, strong-member council; Fig. 2b)
+9. `cd paper && python3 fig_arch.py && python3 fig_results.py` -> figs/ (Fig. 1, Fig. 2)
 
 Latency values depend on hardware; accuracy values are deterministic given the same model files and runtime.
 Security results in Sec. IV-E come from an earlier workstation run (MCP Python SDK + Ollama) and are not re-run here.
